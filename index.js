@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const db = require('cyclic-dynamodb')
 const https = require('https');
-const slackEndPoint = "https://hooks.slack.com/services/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";
+const slackEndPoint = "https://hooks.slack.com/services/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";
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
