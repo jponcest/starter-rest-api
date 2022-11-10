@@ -20,19 +20,16 @@ app.use(express.urlencoded({ extended: true }))
 // #############################################################################
 
 // Create or Update an item
-app.post('/:col/:key', async (req, res) => {
+app.post('/zoom', async (req, res) => {
   console.log(req.body)
-
-  const col = req.params.col
-  const key = req.params.key
-  console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
-  const item = await db.collection(col).set(key, req.body)
-  console.log(JSON.stringify(item, null, 2))
+  const statusMsg = JSON.parse(req);
+  console.log("event ${event} accountId ${statusMsg.payload.account_id}");
+  const result = "OK";
   res.json(item).end()
 })
 
 // Delete an item
-app.delete('/:col/:key', async (req, res) => {
+/*app.delete('/:col/:key', async (req, res) => {
   const col = req.params.col
   const key = req.params.key
   console.log(`from collection: ${col} delete key: ${key} with params ${JSON.stringify(req.params)}`)
@@ -58,8 +55,7 @@ app.get('/:col', async (req, res) => {
   const items = await db.collection(col).list()
   console.log(JSON.stringify(items, null, 2))
   res.json(items).end()
-})
-
+})*/
 // Catch all handler for all other request.
 app.use('*', (req, res) => {
   res.json({ msg: 'no route handler found' }).end()
