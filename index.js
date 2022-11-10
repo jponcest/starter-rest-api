@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const db = require('cyclic-dynamodb')
+const https = require('https');
+const slackEndPoint = "https://hooks.slack.com/services/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";
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -27,7 +29,48 @@ app.post('/zoom', async (req, res) => {
   const accountId = req.body.payload.account_id;
   console.log(`event ${event} accountId ${accountId}`);
   const result = "OK";
-  res.json(result).end()
+  res.json(result).end();
+  
+  let status = "busy";
+  if(event == meeting.ended ){
+	status = "available";
+  }
+  sendRequest({"text":status});
+  
+  
+  
+})
+
+
+sendRequest = ( req => {
+
+  
+    const options = {
+      hostname: slackEndPoint,
+      port: 443,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    const body = [];
+
+    const req = https.request(options, res => {
+      res.on('data', d=> {
+        body.push(req);
+      });
+      res.on('end');
+    });
+    
+    req.on('error', e => {
+      reject(e);
+    });
+    
+    req.write(JSON.stringify(data));
+    req.end();
+
+
 })
 
 // Delete an item
