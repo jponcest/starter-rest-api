@@ -23,7 +23,9 @@ app.use(express.urlencoded({ extended: true }))
 app.post('/zoom', async (req, res) => {
   console.log(req.body)
   const statusMsg = JSON.parse(req.body);
-  console.log("event ${event} accountId ${statusMsg.payload.account_id}");
+    const event = statusMsg.event;
+  const accountId = statusMsg.payload.account_id;
+  console.log("event ${event} accountId ${account_id}");
   const result = "OK";
   res.json(item).end()
 })
