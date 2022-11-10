@@ -42,7 +42,7 @@ app.post('/zoom', async (req, res) => {
 })
 
 
-sendRequest = ( req => {
+sendRequest = ( data => {
 
   
     const options = {
@@ -58,7 +58,7 @@ sendRequest = ( req => {
 
     const req = https.request(options, res => {
       res.on('data', d=> {
-        body.push(req);
+        body.push(data);
       });
       res.on('end');
     });
