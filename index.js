@@ -63,7 +63,7 @@ sendRequest = ( data => {
     });
     
     req.on('error', e => {
-      reject(e);
+  console.log(e);
     });
     
     req.write(JSON.stringify(data));
