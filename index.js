@@ -25,9 +25,9 @@ app.post('/zoom', async (req, res) => {
   
     const event = req.body.event;
   const accountId = req.body.payload.account_id;
-  console.log("event ${event} accountId ${account_id}");
+  console.log("event ${event} accountId ${accountId}");
   const result = "OK";
-  res.json(item).end()
+  res.json(result).end()
 })
 
 // Delete an item
