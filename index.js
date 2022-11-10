@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 // Create or Update an item
 app.post('/zoom', async (req, res) => {
   console.log(req.body)
-  const statusMsg = JSON.parse(req);
+  const statusMsg = JSON.parse(req.body);
   console.log("event ${event} accountId ${statusMsg.payload.account_id}");
   const result = "OK";
   res.json(item).end()
