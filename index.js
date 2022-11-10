@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const db = require('cyclic-dynamodb')
 const https = require('https');
+const slack_hostname = "https://hooks.slack.com/services/";
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -45,7 +46,8 @@ sendRequest = ( data => {
 
   	const slack_endpoint = process.env.SLACK_EP;
     const options = {
-      hostname: slack_endpoint,
+      hostname: slack_hostname,
+      path: slack_endpoint,
       port: 443,
       method: 'POST',
       headers: {
@@ -63,7 +65,7 @@ sendRequest = ( data => {
     });
     
     req.on('error', e => {
-  console.log(e);
+      console.log(e);
     });
     
     req.write(JSON.stringify(data));
