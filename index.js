@@ -32,7 +32,7 @@ app.post('/zoom', async (req, res) => {
   res.json(result).end();
   
   let status = "busy";
-  if(event == meeting.ended ){
+  if(event == "meeting.ended" ){
 	status = "available";
   }
   sendRequest({"text":status});
