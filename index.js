@@ -44,10 +44,10 @@ app.post('/zoom', async (req, res) => {
 
 sendRequest = ( data => {
 
-  	const slack_endpoint = process.env.SLACK_EP;
+  	const slack_endpoint =  "/services/"  + process.env.SLACK_EP;
     const options = {
       hostname: slack_hostname,
-      path: "/services/" + slack_endpoint,
+      path: slack_endpoint,
       port: 443,
       method: 'POST',
       headers: {
