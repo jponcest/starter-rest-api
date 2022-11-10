@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const db = require('cyclic-dynamodb')
 const https = require('https');
-const slackEndPoint = "https://hooks.slack.com/services/";
-const key = "T198C8517/B04AH2S01PE/3XjGR5U8xajjcHYDg0IyHc51";
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -45,9 +43,9 @@ app.post('/zoom', async (req, res) => {
 
 sendRequest = ( data => {
 
-  
+  	const slack_endpoint = process.env.SLACK_EP;
     const options = {
-      hostname: slackEndPoint + key,
+      hostname: slack_endpoint,
       port: 443,
       method: 'POST',
       headers: {
